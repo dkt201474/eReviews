@@ -1,0 +1,74 @@
+{
+  "name": "nightwatch-boilerplate",
+  "version": "1.0.0",
+  "description": "Nightwatch basic template with basic configuration. Starting point for end to end testing",
+  "main": "index.js",
+  "engines": {
+    "node": "4.4.6"
+  },
+  "scripts": {
+    "postinstall": "node nightwatch.conf.js",
+    "test": "bash .\\node_modules\\nightwatch --env local",
+    "A1": "nightwatch --test tests\\tests.js --testcase New_Monfort_project --env local",
+    "A2": "nightwatch --test tests\\tests.js --testcase Other_Project --env local",
+    "A3": "nightwatch --test tests\\tests.js --testcase e51 --env local",
+    "A4": "nightwatch --test tests\\tests.js --testcase e52 --env local",
+    "A5": "nightwatch --test tests\\tests.js --testcase e53 --env local",
+    "A6": "nightwatch --test tests\\tests.js --testcase e54 --env local",
+    "A7": "nightwatch --test tests\\tests.js --testcase e38 --env local",
+    "A8": "nightwatch --test tests\\tests.js --testcase e39_FB --env local",
+    "A9": "nightwatch --test tests\\tests.js --testcase e39_EXP --env local",
+    "A10": "nightwatch --test tests\\tests.js --testcase e311_APPROVED --env local",
+    "A11": "nightwatch --test tests\\tests.js --testcase e311_APPROVED-PARTIAL --env local",
+    "A12": "nightwatch --test tests\\tests.js --testcase e311_REVISION-REQUIRED --env local",
+    "A13": "nightwatch --test tests\\tests.js --testcase e311_ADD-PERMISSIONS-REQUIRED --env local",
+    "A14": "nightwatch --test tests\\tests.js --testcase e311_RESUBMIT --env local",
+    "A15": "nightwatch --test tests\\tests.js --testcase e311_REFUSED --env local",
+    "A16": "nightwatch --test tests\\tests.js --testcase e3XX_Chair-APPROVED --env local",
+    "A17": "nightwatch --test tests\\tests.js --testcase e3XX_Chair-APPROVED-PARTIAL --env local",
+    "A18": "nightwatch --test tests\\tests.js --testcase e3XX_Chair-REVISION-REQUIRED --env local",
+    "A19": "nightwatch --test tests\\tests.js --testcase e3XX_Chair-ADD-PERMISSIONS-REQUIRED --env local",
+    "A20": "nightwatch --test tests\\tests.js --testcase e3XX_Chair-RESUBMIT --env local",
+    "A21": "nightwatch --test tests\\tests.js --testcase e3XX_Chair-REFUSED --env local",
+    "A22": "nightwatch --test tests\\tests.js --testcase FROM_CHAIR_PO-APPROVED --env local",
+    "A23": "nightwatch --test tests\\tests.js --testcase FROM_CHAIR_PO-APPROVED-PARTIAL --env local",
+    "A24": "nightwatch --test tests\\tests.js --testcase FROM_CHAIR_PO-REVISION-REQUIRED --env local",
+    "A25": "nightwatch --test tests\\tests.js --testcase FROM_CHAIR_PO-ADD-PERMISSIONS-REQUIRED --env local",
+    "A26": "nightwatch --test tests\\tests.js --testcase FROM_CHAIR_PO-RESUBMIT --env local",
+    "A27": "nightwatch --test tests\\tests.js --testcase FROM_CHAIR_PO-REFUSED --env local",
+    "UNIWEB_1": "nightwatch --test tests\\tests.js --testcase UNIWEB_1 --env local",
+    "UNIWEB_2": "nightwatch --test tests\\tests.js --testcase UNIWEB_2 --env local",
+    "UNIWEB_3": "nightwatch --test tests\\tests.js --testcase UNIWEB_3 --env local",
+    "dev": "./node_modules/.bin/nodemon -w test/index.html --delay 250ms --exec 'npm run upload'",
+    "start": "./node_modules/.bin/nodemon ui/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dkt201474/nightwatch-boilerplate.git"
+  },
+  "author": "dkt201474",
+  "license": "MIT",
+  "homepage": "https://github.com/dkt201474/nightwatch-boilerplate#readme",
+  "dependencies": {
+    "jsonfile": "^4.0.0",
+    "lodash": "^4.17.4",
+    "nightwatch": "^0.9.9",
+    "node-powershell": "^3.3.1",
+    "selenium-download": "^2.0.7",
+    "uuid": "^3.2.1"
+  },
+  "devDependencies": {
+    "nodemon": "^1.11.0"
+  },
+  "keywords": [
+    "nightwatch",
+    "testing",
+    "front-end",
+    "UI",
+    "browser",
+    "test",
+    "testing",
+    "User Acceptance Testing",
+    "UAT"
+  ]
+}

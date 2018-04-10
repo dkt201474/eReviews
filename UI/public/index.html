@@ -1,0 +1,257 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <title>eReviews testing GUI</title>
+</head>
+
+<style>
+    .tableWrapper {
+        width: 90%;
+        margin-left: 5%;
+    }
+
+    .demo {
+        border: 1px solid #c0c0c0;
+        border-collapse: collapse;
+        padding: 5px;
+    }
+
+    .demo th {
+        border: 1px solid #c0c0c0;
+        padding: 5px;
+        background: #dddddd;
+    }
+
+    .demo td {
+        border: 1px solid #c0c0c0;
+        padding: 5px;
+    }
+
+    .modal-body .form-horizontal .col-sm-2,
+    .modal-body .form-horizontal .col-sm-10 {
+        width: 100%
+    }
+
+    .modal-body .form-horizontal .control-label,
+    h3 {
+        text-align: left;
+    }
+
+    .control-label {
+        font-size: 16px
+    }
+
+    .modal-body .form-horizontal .col-sm-offset-2 {
+        margin-left: 15px;
+    }
+</style>
+
+<body>
+    <div class="App">
+        <h1 class="App-title" style="text-align: center">Welcome to eReviews Testing application</h1>
+        <h2 style="text-align: center">
+            <a href="http://localhost:3000/ereviews/playground">Playground</a>
+        </h2>
+        <h2 style="text-align: center">
+            <a href="http://localhost:3000/ereviews/reports">Reports</a>
+        </h2>
+        <h2 style="text-align: center" id="configs">
+            <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModalHorizontal">
+                Configs
+            </button>
+
+            <div class="modal fade" id="myModalHorizontal" tabindex="-1" role="dialog" aria-hidden="true" aria-labelledby="myModalLabel">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <!-- Modal Header -->
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">
+                                <span aria-hidden="true">&times;</span>
+                                <span class="sr-only">Close</span>
+                            </button>
+                            <h4 class="modal-title" id="myModalLabel">
+                                eReviews testing configs
+                            </h4>
+                        </div>
+
+                        <!-- Modal Body -->
+                        <div class="modal-body">
+
+                            <form class="form-horizontal" role="form">
+                                <div class="form-group" style="text-align: left">
+                                    <h3 style="margin-left: 10px">Select User</h3>
+                                    <select name="user" id="user" style="margin-left: 15">
+                                        <option value="Sadeck_YN">Sadeck YN</option>
+                                        <option value="David_Thompson">David Thompson</option>
+                                        <option value="LA_Hupe">LA Hupe</option>
+                                        <option value="Thien_Thong">Thien Thong</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <h3 style="margin-left: 10px">PI</h3>
+                                    <label class="col-sm-2 control-label" for="pi_username">username</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" id="pi_username" placeholder="username" required="true" />
+                                    </div>
+
+                                    <label class="col-sm-2 control-label" for="pi_password">password</label>
+                                    <div class="col-sm-10">
+                                        <input type="password" class="form-control" id="pi_password" placeholder="Password" />
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <h3 style="margin-left: 10px">Admin</h3>
+                                    <label class="col-sm-2 control-label" for="admin_username">username</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" id="admin_username" placeholder="username" />
+                                    </div>
+
+                                    <label class="col-sm-2 control-label" for="admin_password">password</label>
+                                    <div class="col-sm-10">
+                                        <input type="password" class="form-control" id="admin_password" placeholder="Password" />
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <h3 style="margin-left: 10px">Ethic coordinator</h3>
+                                    <label class="col-sm-2 control-label" for="ec_username">username</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" id="ec_username" placeholder="username" />
+                                    </div>
+
+                                    <label class="col-sm-2 control-label" for="ec_password">password</label>
+                                    <div class="col-sm-10">
+                                        <input type="password" class="form-control" id="ec_password" placeholder="Password" />
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <h3 style="margin-left: 10px">PO</h3>
+                                    <label class="col-sm-2 control-label" for="po_username">username</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" id="po_username" placeholder="username" />
+                                    </div>
+
+                                    <label class="col-sm-2 control-label" for="po_password">password</label>
+                                    <div class="col-sm-10">
+                                        <input type="password" class="form-control" id="po_password" placeholder="Password" />
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <h3 style="margin-left: 10px">Chair</h3>
+                                    <label class="col-sm-2 control-label" for="chair_username">username</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" id="chair_username" placeholder="username" />
+                                    </div>
+
+                                    <label class="col-sm-2 control-label" for="chair_password">password</label>
+                                    <div class="col-sm-10">
+                                        <input type="password" class="form-control" id="chair_password" placeholder="Password" />
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <h3 style="margin-left: 10px">Supervisor</h3>
+                                    <label class="col-sm-2 control-label" for="supervisor_username">username</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" id="supervisor_username" placeholder="username" />
+                                    </div>
+
+                                    <label class="col-sm-2 control-label" for="supervisor_password">password</label>
+                                    <div class="col-sm-10">
+                                        <input type="password" class="form-control" id="supervisor_password" placeholder="Password" />
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+
+                        <!-- Modal Footer -->
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">
+                                Close
+                            </button>
+                            <button type="button" class="btn btn-primary" id="saveChanges" data-dismiss="modal">
+                                Save changes
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+    </h2>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</body>
+
+</html>
+
+<script>
+    $(function () {
+        $("#saveChanges").click(() => {
+            const fields = {
+                pi_username: $("#pi_username").val(),
+                pi_password: $("#pi_password").val(),
+                admin_username: $("#admin_username").val(),
+                admin_password: $("#admin_password").val(),
+                ec_username: $("#ec_username").val(),
+                ec_password: $("#ec_password").val(),
+                po_username: $("#po_username").val(),
+                po_password: $("#po_password").val(),
+                chair_username: $("#chair_username").val(),
+                chair_password: $("#chair_password").val(),
+                supervisor_username: $("#supervisor_username").val(),
+                supervisor_password: $("#supervisor_password").val(),
+                user: $("#user").val()
+            }
+            let configs = {};
+            let err = false;
+            if (
+                fields.pi_username === '' &&
+                fields.pi_password === '' ||
+                fields.admin_username === '' &&
+                fields.admin_password === '' ||
+                fields.ec_username === '' &&
+                fields.ec_password === '' ||
+                fields.po_username === '' &&
+                fields.po_password === '' &&
+                fields.chair_username === '' &&
+                fields.chair_password === '' ||
+                fields.supervisor_username === '' &&
+                fields.supervisor_password === ''
+            ) {
+                err = true;
+            }
+
+            configs.pi = { username: fields.pi_username, password: fields.pi_password };
+            configs.admin = { username: fields.admin_username, password: fields.admin_password };
+            configs.ec = { username: fields.ec_username, password: fields.ec_password };
+            configs.po = { username: fields.po_username, password: fields.po_password };
+            configs.chair = { username: fields.chair_username, password: fields.chair_password };
+            configs.supervisor = { username: fields.supervisor_username, password: fields.supervisor_password };
+            configs.user = fields.user;
+
+            // checks fields are not empty
+            if (err) {
+                alert('Form incompleted')
+            }
+            else {
+                $.post(
+                    'http://localhost:3000/ereviews/credentials',
+                    configs,
+                    (data, status) => { console.log(data); },
+                    'json'
+                ).done(alert('Config file created successfully'));
+            }
+
+        })
+    });
+</script>

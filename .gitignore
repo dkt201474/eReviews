@@ -1,0 +1,19 @@
+UI/node_modules/
+/tests/credentials.json
+/UI/config/db.js
+npm-debug.log
+nohup.out
+selenium-debug.log
+node_modules/
+.DS_Store
+
+# exclued selenium.jar from GitHub it's 21MB!
+nightwatch
+nightwatch/selenium.jar
+
+# exclude chromedriver as its 12MB and changes frequently!
+nightwatch/chromedriver
+
+reports
+screenshots
+.env

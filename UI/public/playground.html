@@ -1,0 +1,113 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <title>Playground</title>
+</head>
+
+<style>
+    .tableWrapper {
+        width: 90%;
+        margin-left: 5%;
+    }
+
+    .demo {
+        border: 1px solid #c0c0c0;
+        border-collapse: collapse;
+        padding: 5px;
+    }
+
+    .demo th {
+        border: 1px solid #c0c0c0;
+        padding: 5px;
+        background: #dddddd;
+    }
+
+    .demo td {
+        border: 1px solid #c0c0c0;
+        padding: 5px;
+    }
+</style>
+
+<body>
+    <div class="App">
+        <h1 class="App-title" style="text-align: center">eReviews Playground</h1>
+        <h4 style="text-align: center">
+            <a href="http://localhost:3000/ereviews">Home</a>
+            |
+            <a href="http://localhost:3000/ereviews/reports">Reports</a>
+        </h4>
+
+        <div class="tableWrapper" id="tableWrapper">
+            <table class="demo">
+                <thead>
+                    <tr>
+                        <th id="headerId">Action ID</th>
+                        <th id="headerTitle">Action title</th>
+                        <th id="headerDesc">Action description</th>
+                        <th id="headerPrereq">Prerequisite</th>
+                        <th id="headerEmail">Email involved</th>
+                        <th id="headerEmail">Run Action</th>
+                    </tr>
+                </thead>
+                <tbody id="templateContent">
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</body>
+
+</html>
+
+<script>
+    let runTest;
+    $(function () {
+        $.getJSON('http://localhost:3000/ereviews/credentials', function (data) {
+            $.getJSON('http://localhost:3000/ereviews/testcases/list', function (data) {
+                const AUTOMATED = data;
+
+                // Automated templates
+                for (let key in AUTOMATED) {
+
+                    if (AUTOMATED.hasOwnProperty(key)) {
+                        let template = AUTOMATED[key];
+
+                        let rowColor = '#ffffff';
+
+                        if (key % 2 == 0) {
+                            rowColor = '#f0f0f0';
+                        }
+
+                        $('#templateContent').append(
+                            "<tr> <td style='background: #dddddd; font-weight: bold' id='templateId'>" +
+                            template.id +
+                            "</td> <td style='background: " + rowColor + ";' id='templateTitle'>" +
+                            template.title +
+                            "</td> <td style='background: " + rowColor + ";' id='templateDesc'>" +
+                            template.desc +
+                            "</td> <td style='background: " + rowColor + ";' id='templatePrereq'>" +
+                            template.prerequisite +
+                            "</td> <td style='background: " + rowColor + ";' id='templateEmailInvolved'>" +
+                            template.email_involved +
+                            " </td> <td style='background: " + rowColor + ";' id='templateTestButton'> <button class='btn btn-primary' onclick='runTest(" + '\"' + template.id + '\"' + ")' id='" + 'btn_' + template.id + "'>Test</button> </td > </tr>"
+                        );
+
+                        const buttonId = '#btn_' + template.id;
+                        runTest = function (templateId) {
+                            $.post('http://localhost:3000/ereviews', { testId: templateId });
+                        }
+                    }
+                }
+            });
+        })
+            .fail((obj, status, err) => {
+                $("#tableWrapper").html("<div>Your config file is required before using this service. You can create it by hitting the 'Configs' button <a href='http://localhost:3000/ereviews'>here</a></div>")
+            });
+        // get templates files
+
+    })
+</script>

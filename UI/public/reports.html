@@ -1,0 +1,351 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <title>Reports</title>
+</head>
+
+<style>
+    .tableWrapper {
+        width: 90%;
+        margin-left: 5%;
+    }
+
+    .demo {
+        border: 1px solid #c0c0c0;
+        border-collapse: collapse;
+        padding: 5px;
+    }
+
+    .demo th {
+        border: 1px solid #c0c0c0;
+        padding: 5px;
+        background: #dddddd;
+    }
+
+    .demo td {
+        border: 1px solid #c0c0c0;
+        padding: 5px;
+    }
+</style>
+
+<body>
+    <div class="App">
+        <h1 class="App-title" style="text-align: center">eReviews testing reports of
+
+            <form action="" style="margin-top: 5px">
+                <select name="user" id="user" style="margin-left: 15">
+                    <option value="sadeck">Sadeck YN</option>
+                    <option value="David Thompson">David Thompson</option>
+                    <option value="LA Hupe">LA Hupe</option>
+                    <option value="Thien Thong">Thien Thong</option>
+                </select>
+            </form>
+
+        </h1>
+        <h4 style="text-align: center">
+            <a href="http://localhost:3000/ereviews">Home</a>
+            |
+            <a href="http://localhost:3000/ereviews/playground">Playground</a>
+        </h4>
+
+        <div class="tableWrapper table panel-body">
+            <div style="margin: 25px 0px 5px 0px">
+                <button class="btn btn-primary btn-lg btn-block" data-toggle="modal" data-target="#createReportModal" id="createReportModalTrigger">
+                    Create report</button>
+            </div>
+
+            <!-- Create a report -->
+            <div class="modal fade" id="createReportModal" tabindex="-1" role="dialog" aria-hidden="true" aria-labelledby="myModalLabel">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <!-- Modal Header -->
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">
+                                <span aria-hidden="true">&times;</span>
+                                <span class="sr-only">Close</span>
+                            </button>
+                            <h4 class="modal-title" id="myModalLabel">
+                                Create a new Report
+                            </h4>
+                        </div>
+
+                        <!-- Modal Body -->
+                        <div class="modal-body">
+                            <form class="form-horizontal" role="form">
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label" for="c_templateNumber">Template#</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" id="c_templateNumber" placeholder="email 3.9" required="true" />
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label" for="c_title">Title</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" id="c_title" placeholder="Title" />
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label" for="c_error">Errors</label>
+                                    <div class="col-sm-10">
+                                        <textarea class="form-control" name="c_error" id="c_error" rows="5"></textarea>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+
+                        <!-- Modal Footer -->
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal" id="closeCreateReportModal">
+                                Close
+                            </button>
+                            <button type="button" class="btn btn-primary" id="createReportButton" data-dismiss="modal">
+                                Create report
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Update a report -->
+            <div class="modal fade" id="updateReport" tabindex="-1" role="dialog" aria-hidden="true" aria-labelledby="myModalLabel">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <!-- Modal Header -->
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">
+                                <span aria-hidden="true">&times;</span>
+                                <span class="sr-only">Close</span>
+                            </button>
+                            <h4 class="modal-title" id="myModalLabel">
+                                Update a report
+                            </h4>
+                        </div>
+
+                        <!-- Modal Body -->
+                        <div class="modal-body">
+                            <form class="form-horizontal" role="form">
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label" for="templateNumber">Template#</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" id="templateNumber" placeholder="email 3.9" required="true" />
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label" for="title">Title</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" id="title" placeholder="Title" />
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label" for="error">Errors</label>
+                                    <div class="col-sm-10">
+                                        <textarea class="form-control" name="error" id="error" rows="5"></textarea>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+
+                        <!-- Modal Footer -->
+                        <div class="modal-footer">
+                            <button type="button" id="deleteReportButton" class="btn btn-danger" data-dismiss="modal">
+                                Delete report
+                            </button>
+                            <button type="button" class="btn btn-primary" id="updateReportButton" data-dismiss="modal">
+                                Update report
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <table class="demo" id="reportsTable" style="width: 100%">
+                <thead>
+                    <tr>
+                        <th id="headerId">Template#</th>
+                        <th id="headerTitle">Title</th>
+                        <th id="headerDesc">Errors</th>
+                        <th id="headerPrereq2">Updated</th>
+                        <th id="headerPrereq">Action</th>
+                    </tr>
+                </thead>
+                <tbody id="templateContent">
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</body>
+
+</html>
+
+<script>
+    let runTest;
+    $(function () {
+
+        let printReports = (reports, userId) => {
+
+            if (!reports || reports.error) {
+                $('#templateContent').html("<p>No report created yet</p>");
+            } else {
+                $('#templateContent').html("");
+                for (let key in reports) {
+                    if (reports.hasOwnProperty(key)) {
+                        let template = reports[key];
+
+                        let rowColor = '#ffffff';
+
+                        if (key % 2 == 0) {
+                            rowColor = '#f0f0f0';
+                        }
+
+                        $('#templateContent').append(
+                            "<tr> <td style='background: #dddddd; font-weight: bold' id='" + template.id + "'>" + template.number +
+                            "</td> <td style='background: " + rowColor + ";' id='templateTitle'>" +
+                            template.title +
+                            "</td> <td style='background: " + rowColor + ";' id='templateDesc'>" +
+                            template.error +
+                            "</td> <td style='background: " + rowColor + ";' id='templatePrereq'>" +
+                            template.updatedAt +
+                            "</td> <td style='background: " + rowColor + ";' id='templateButton'><button userid='" + userId + "' reportid='" + template.id + "' class='btn btn-primary center-block' data-toggle='modal' data-target='#updateReport'>Modify</button></td>"
+                        );
+                    }
+                }
+            }
+        };
+
+        let clearTable = () => {
+            $('#templateContent').html("<div></div>");
+        }
+
+        // unable to read any report if config file not yet created
+        // Get user saved in configs
+        $.getJSON('http://localhost:3000/ereviews/credentials', function (data) {
+            if (data.error) {
+                $('#templateContent').html("<p>Please create  <a href='http://localhost:3000/ereviews'>the config file</a> first to see your reports and the other people reports.</p>")
+                $('#createReportModalTrigger').prop('disabled', true);
+            } else {
+                credentialUser = data.user;
+                $('#userSelected').val(credentialUser);
+                // get templates files
+                $.getJSON('http://localhost:3000/ereviews/reports/list', { username: credentialUser }, function (user) {
+                    printReports(user.reports, user._id);
+
+                    // user changed
+                    $('select').on('change', function () {
+                        let selectedUser = this.value;
+
+                        $.getJSON('http://localhost:3000/ereviews/reports/list', { username: selectedUser }, function (user) {
+                            printReports(user.reports, user._id);
+
+                            if (selectedUser !== credentialUser) {
+                                console.log(selectedUser);
+                                $('button').prop('disabled', true);
+                            } else {
+                                $('button').prop('disabled', false);
+                            }
+                        });
+                    });
+
+                    $('#templateContent button').click((e) => {
+                        let reportId = $(e.currentTarget).attr('reportid');
+                        let userId = $(e.currentTarget).attr('userid');
+                        console.log(reportId);
+
+                        // ---> Delete report
+                        $('#deleteReportButton').click(() => {
+                            $.post(
+                                'http://localhost:3000/ereviews/report/delete',
+                                { userId: userId, reportId: reportId },
+                                (data, status) => {
+                                    clearTable();
+                                    printReports(data.reports, data._id);
+                                    location.reload(true);
+                                },
+                                'json'
+                            );
+                        });
+
+                        $('#updateReportButton').click(() => {
+                            const templateNumber = $('#templateNumber');
+                            const templateTitle = $('#title');
+                            const templateError = $('textarea#error');
+
+                            const user = {
+                                userId: userId,
+                                reportId: reportId,
+                                reportData: {
+                                    number: templateNumber.val(),
+                                    title: templateTitle.val(),
+                                    error: templateError.val()
+                                }
+                            }
+
+                            $.post(
+                                'http://localhost:3000/ereviews/report/update',
+                                { payload: user },
+                                (data, status) => {
+                                    clearTable();
+                                    printReports(data.reports, data._id);
+                                    location.reload(true);
+                                },
+                                'json'
+                            );
+                        });
+                    });
+                });
+            }
+        });
+
+        // ---> Create report
+        $('#createReportModalTrigger').click(() => {
+            $.getJSON('http://localhost:3000/ereviews/credentials', function (data) {
+                const templateNumber = $('#c_templateNumber');
+                const templateTitle = $('#c_title');
+                const templateError = $('textarea#c_error');
+
+                $('#createReportButton').click(() => {
+                    const username = data.user;
+                    const user = {
+                        name: username,
+                        report: {
+                            number: templateNumber.val(),
+                            title: templateTitle.val(),
+                            error: templateError.val()
+                        }
+                    }
+
+                    if (user.name === '' || user.report.error === '' || user.report.number === "" || user.report.title === "") {
+                        alert('Every fields are required')
+                    } else {
+                        $.post(
+                            'http://localhost:3000/ereviews/report/create',
+                            user,
+                            (data, status) => {
+                                // Update reports
+                                clearTable();
+                                printReports(data.reports);
+                                location.reload(true);
+                            },
+                            'json'
+                        );
+                    }
+                });
+                // Create template infos
+            })
+                // Fichier de configuration non disponible
+                .fail((obj, status, err) => {
+                    alert('You need to create a config file at Home page before using this functionnality');
+                    $("#closeCreateReportModal").trigger('click');
+                });
+        });
+
+    })
+</script>
