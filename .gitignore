@@ -1,6 +1,12 @@
-UI/node_modules/
-/tests/credentials.json
-/UI/config/db.js
+# eReviews .gitinore
+reports
+screenshots
+tests/credentials.json
+UI/config/db.js
+UI/node_modules
+
+
+# Basic .gitinore
 npm-debug.log
 nohup.out
 selenium-debug.log
@@ -14,6 +20,3 @@ nightwatch/selenium.jar
 # exclude chromedriver as its 12MB and changes frequently!
 nightwatch/chromedriver
 
-reports
-screenshots
-.env
