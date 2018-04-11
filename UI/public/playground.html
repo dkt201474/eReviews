@@ -93,13 +93,15 @@
                             template.prerequisite +
                             "</td> <td style='background: " + rowColor + ";' id='templateEmailInvolved'>" +
                             template.email_involved +
-                            " </td> <td style='background: " + rowColor + ";' id='templateTestButton'> <button class='btn btn-primary' onclick='runTest(" + '\"' + template.id + '\"' + ")' id='" + 'btn_' + template.id + "'>Test</button> </td > </tr>"
+                            " </td> <td style='background: " + rowColor + ";' id='templateTestButton'> <button class='btn btn-primary' id='" + 'btn_' + template.id + "'>Test</button> </td > </tr>"
                         );
 
                         const buttonId = '#btn_' + template.id;
                         runTest = function (templateId) {
                             $.post('http://localhost:3000/ereviews', { testId: templateId });
                         }
+
+                        $(`${buttonId}`).unbind('click').click((e) => runTest(template.id));
                     }
                 }
             });

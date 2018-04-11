@@ -665,7 +665,7 @@ module.exports = {
       .useXpath ()
       .setValue ('//*[@id="username"]', CREDENTIALS.ec.username)
       .setValue ('//*[@id="password"]', CREDENTIALS.ec.password)
-      .click ('//*[@id="j_idt102"]')
+      .click ('//*[@id="j_idt75"]')
       // .........................................................................
       // Step 2: Create a new project
       // Page: Researcher Dashboard

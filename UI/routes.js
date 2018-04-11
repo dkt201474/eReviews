@@ -31,7 +31,6 @@ module.exports = (app, db) => {
       .addCommand (`npm run ${testId}`)
       .then (result => {
         ps.invoke ().then (output => {
-          console.log (output);
           res.send (output);
         });
       })
@@ -46,7 +45,6 @@ module.exports = (app, db) => {
       .addCommand (`cd ..\\; npm run UNIWEB_${testId}; cd UI`)
       .then (result => {
         ps.invoke ().then (output => {
-          console.log (output);
           res.send (output);
         });
       })
@@ -61,7 +59,7 @@ module.exports = (app, db) => {
     const filename = './tests/credentials.json';
 
     jsonfile.writeFile (filename, data, err => {
-      console.log (err);
+      //console.log (err);
     });
   });
 
@@ -92,7 +90,7 @@ module.exports = (app, db) => {
     db.collection ('users').updateOne (query, newValues, (err, results) => {
       if (err) {
         res.status (500).send ({error: 'An error has occurred'});
-        console.log (err);
+        //console.log (err);
       } else {
         db.collection ('users').findOne (query, (err, updatedUser) => {
           // console.log (results);
@@ -111,10 +109,10 @@ module.exports = (app, db) => {
     db.collection ('users').updateOne (query, newValues, (err, results) => {
       if (err) {
         res.status (500).send ({error: 'An error has occurred'});
-        console.log (err);
+        //console.log (err);
       } else {
         db.collection ('users').findOne (query, (err, updateUser) => {
-          console.log (results);
+          //console.log (results);
           res.send (updateUser);
         });
       }
@@ -137,10 +135,10 @@ module.exports = (app, db) => {
     db.collection ('users').updateOne (query, newValues, (err, results) => {
       if (err) {
         res.status (500).send ({error: 'An error has occurred'});
-        console.log (err);
+        //console.log (err);
       } else {
         db.collection ('users').findOne (query, (err, updateUser) => {
-          console.log (updateUser);
+          //console.log (updateUser);
           res.send (updateUser);
         });
       }
@@ -153,7 +151,7 @@ module.exports = (app, db) => {
     db.collection ('users').findOne ({username: name}, (err, user) => {
       if (err) {
         res.send ({error: 'An error has occured'});
-        console.log (err);
+        //console.log (err);
       } else {
         res.setHeader ('Content-Type', 'application/json');
 

@@ -246,7 +246,6 @@
                             printReports(user.reports, user._id);
 
                             if (selectedUser !== credentialUser) {
-                                console.log(selectedUser);
                                 $('button').prop('disabled', true);
                             } else {
                                 $('button').prop('disabled', false);
@@ -257,7 +256,6 @@
                     $('#templateContent button').click((e) => {
                         let reportId = $(e.currentTarget).attr('reportid');
                         let userId = $(e.currentTarget).attr('userid');
-                        console.log(reportId);
 
                         // ---> Delete report
                         $('#deleteReportButton').click(() => {

@@ -16,8 +16,6 @@ function getConfig () {
 
   config = jsonfile.readFileSync (configPath)[name];
 
-  console.log ('Test config file');
-  console.log (config);
   return config;
 }
 
