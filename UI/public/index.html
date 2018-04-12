@@ -60,9 +60,9 @@
         <h2 style="text-align: center">
             <a href="http://localhost:3000/ereviews/reports">Reports</a>
         </h2>
-        <h2 style="text-align: center" id="configs">
+        <h2 style="text-align: center" id="credentials">
             <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModalHorizontal">
-                Configs
+                Credentials
             </button>
 
             <div class="modal fade" id="myModalHorizontal" tabindex="-1" role="dialog" aria-hidden="true" aria-labelledby="myModalLabel">
@@ -75,7 +75,7 @@
                                 <span class="sr-only">Close</span>
                             </button>
                             <h4 class="modal-title" id="myModalLabel">
-                                eReviews testing configs
+                                eReviews testing credentials
                             </h4>
                         </div>
 
@@ -170,6 +170,19 @@
                                         <input type="password" class="form-control" id="supervisor_password" placeholder="Password" />
                                     </div>
                                 </div>
+
+                                <div class="form-group">
+                                    <h3 style="margin-left: 10px">Director</h3>
+                                    <label class="col-sm-2 control-label" for="director_username">username</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" id="director_username" placeholder="username" />
+                                    </div>
+
+                                    <label class="col-sm-2 control-label" for="director_password">password</label>
+                                    <div class="col-sm-10">
+                                        <input type="password" class="form-control" id="director_password" placeholder="Password" />
+                                    </div>
+                                </div>
                             </form>
                         </div>
 
@@ -196,62 +209,67 @@
 
 <script>
     $(function () {
-        $("#saveChanges").click(() => {
-            const fields = {
-                pi_username: $("#pi_username").val(),
-                pi_password: $("#pi_password").val(),
-                admin_username: $("#admin_username").val(),
-                admin_password: $("#admin_password").val(),
-                ec_username: $("#ec_username").val(),
-                ec_password: $("#ec_password").val(),
-                po_username: $("#po_username").val(),
-                po_password: $("#po_password").val(),
-                chair_username: $("#chair_username").val(),
-                chair_password: $("#chair_password").val(),
-                supervisor_username: $("#supervisor_username").val(),
-                supervisor_password: $("#supervisor_password").val(),
-                user: $("#user").val()
-            }
-            let configs = {};
-            let err = false;
-            if (
-                fields.pi_username === '' &&
-                fields.pi_password === '' ||
-                fields.admin_username === '' &&
-                fields.admin_password === '' ||
-                fields.ec_username === '' &&
-                fields.ec_password === '' ||
-                fields.po_username === '' &&
-                fields.po_password === '' &&
-                fields.chair_username === '' &&
-                fields.chair_password === '' ||
-                fields.supervisor_username === '' &&
-                fields.supervisor_password === ''
-            ) {
-                err = true;
-            }
 
-            configs.pi = { username: fields.pi_username, password: fields.pi_password };
-            configs.admin = { username: fields.admin_username, password: fields.admin_password };
-            configs.ec = { username: fields.ec_username, password: fields.ec_password };
-            configs.po = { username: fields.po_username, password: fields.po_password };
-            configs.chair = { username: fields.chair_username, password: fields.chair_password };
-            configs.supervisor = { username: fields.supervisor_username, password: fields.supervisor_password };
-            configs.user = fields.user;
+        $.getJSON('http://localhost:3000/ereviews/credentials', function (fileData) {
 
-            // checks fields are not empty
-            if (err) {
-                alert('Form incompleted')
+            // Fill out form if data created in the first place
+            if (!fileData.error) {
+                $("#pi_username").val(fileData.pi.username);
+                $("#pi_password").val(fileData.pi.password);
+                $("#admin_username").val(fileData.admin.password);
+                $("#admin_password").val(fileData.admin.password);
+                $("#ec_username").val(fileData.ec.password);
+                $("#ec_password").val(fileData.ec.password);
+                $("#po_username").val(fileData.po.password);
+                $("#po_password").val(fileData.po.password);
+                $("#chair_username").val(fileData.chair.password);
+                $("#chair_password").val(fileData.chair.password);
+                $("#supervisor_username").val(fileData.supervisor.password);
+                $("#supervisor_password").val(fileData.supervisor.password);
+                $("#director_username").val(fileData.director.password);
+                $("#director_password").val(fileData.director.password);
+                $("#user").val(fileData.user)
             }
-            else {
+            // when click
+            $("#saveChanges").click(() => {
+                const fields = {
+                    pi_username: $("#pi_username").val(),
+                    pi_password: $("#pi_password").val(),
+                    admin_username: $("#admin_username").val(),
+                    admin_password: $("#admin_password").val(),
+                    ec_username: $("#ec_username").val(),
+                    ec_password: $("#ec_password").val(),
+                    po_username: $("#po_username").val(),
+                    po_password: $("#po_password").val(),
+                    chair_username: $("#chair_username").val(),
+                    chair_password: $("#chair_password").val(),
+                    supervisor_username: $("#supervisor_username").val(),
+                    supervisor_password: $("#supervisor_password").val(),
+                    director_username: $("#director_username").val(),
+                    director_password: $("#director_password").val(),
+                    user: $("#user").val()
+                }
+
+                let credentials = {};
+
+                credentials.pi = { username: fields.pi_username, password: fields.pi_password };
+                credentials.admin = { username: fields.admin_username, password: fields.admin_password };
+                credentials.ec = { username: fields.ec_username, password: fields.ec_password };
+                credentials.po = { username: fields.po_username, password: fields.po_password };
+                credentials.chair = { username: fields.chair_username, password: fields.chair_password };
+                credentials.supervisor = { username: fields.supervisor_username, password: fields.supervisor_password };
+                credentials.director = { username: fields.director_username, password: fields.director_password };
+                credentials.user = fields.user;
+
+                console.log(credentials);
+
                 $.post(
                     'http://localhost:3000/ereviews/credentials',
-                    configs,
+                    credentials,
                     (data, status) => { console.log(data); },
                     'json'
                 ).done(alert('Config file created successfully'));
-            }
-
-        })
+            })
+        });
     });
 </script>

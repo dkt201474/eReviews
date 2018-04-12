@@ -1,6 +1,6 @@
 function getCredentials () {
   const jsonfile = require ('jsonfile');
-  const filename = './tests/credentials.json';
+  const filename = 'credentials.json';
 
   credentials = jsonfile.readFileSync (filename);
 
@@ -9,8 +9,8 @@ function getCredentials () {
 
 function getConfig () {
   const jsonfile = require ('jsonfile');
-  const credentialsPath = './tests/credentials.json';
-  const configPath = './tests/config.json';
+  const credentialsPath = 'credentials.json';
+  const configPath = 'config.json';
 
   name = jsonfile.readFileSync (credentialsPath).user;
 

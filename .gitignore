@@ -1,7 +1,7 @@
 # eReviews .gitinore
 reports
 screenshots
-tests/credentials.json
+credentials.json
 UI/config/db.js
 UI/node_modules
 

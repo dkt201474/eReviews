@@ -7,6 +7,7 @@ let ps = new shell ();
 let ObjectID = require ('mongodb').ObjectID;
 
 module.exports = (app, db) => {
+  // ======== eReviews =================================
   app.get ('/ereviews/playground', (req, res) => {
     res.sendFile (path.join (__dirname + '/public/playground.html'));
   });
@@ -16,15 +17,11 @@ module.exports = (app, db) => {
   app.get ('/ereviews', (req, res) => {
     res.sendFile (path.join (__dirname + '/public/index.html'));
   });
-
-  app.get ('/uniweb', (req, res) => {
-    res.sendFile (path.join (__dirname + '/public/uniweb.html'));
-  });
-
   app.get ('/', (req, res) => {
     res.sendFile (path.join (__dirname + '/public/menu.html'));
   });
 
+  // ======== Launch command =================================
   app.post ('/ereviews', (req, res) => {
     const testId = req.body.testId;
     ps
@@ -39,32 +36,18 @@ module.exports = (app, db) => {
       });
   });
 
-  app.post ('/uniweb', (req, res) => {
-    const testId = req.body.testId;
-    ps
-      .addCommand (`cd ..\\; npm run UNIWEB_${testId}; cd UI`)
-      .then (result => {
-        ps.invoke ().then (output => {
-          res.send (output);
-        });
-      })
-      .catch (err => {
-        res.send ({error: err});
-      });
-  });
-
-  // Write credentials to credentials.json
+  // ======== Credentials =================================
   app.post ('/ereviews/credentials', (req, res) => {
     const data = req.body;
-    const filename = './tests/credentials.json';
+    const filename = 'credentials.json';
 
     jsonfile.writeFile (filename, data, err => {
-      //console.log (err);
+      console.log (data);
     });
   });
 
   app.get ('/ereviews/credentials', (req, res) => {
-    const filename = '../tests/credentials.json';
+    const filename = 'credentials.json';
 
     jsonfile.readFile (filename, (err, data) => {
       if (err) {
@@ -75,7 +58,7 @@ module.exports = (app, db) => {
     });
   });
 
-  // <<<<  Reports  >>>>
+  // ======== Reports =================================
   app.post ('/ereviews/report/create', (req, res) => {
     // console.log (req.body);
     let payload = req.body;
@@ -155,7 +138,10 @@ module.exports = (app, db) => {
       } else {
         res.setHeader ('Content-Type', 'application/json');
 
-        if (user.reports.length <= 0) {
+        if (!user) {
+          console.log ('User not found');
+          console.log (name);
+        } else if (user.reports.length <= 0) {
           res.send ({error: 'Error: The asked resource is empty'});
         } else {
           res.send (JSON.stringify (user));
@@ -164,7 +150,7 @@ module.exports = (app, db) => {
     });
   });
 
-  // <<< Users >>>
+  // ======== Users =================================
   app.post ('/ereviews/user/create', (req, res) => {
     // console.log (req.body);
     const user = {
@@ -181,7 +167,7 @@ module.exports = (app, db) => {
     });
   });
 
-  // <<<<  Testcases  >>>>
+  // ======== Testcases =================================
   app.post ('/ereviews/testcase/create', (req, res) => {
     const test = {
       id: req.body.id,
@@ -211,5 +197,4 @@ module.exports = (app, db) => {
       }
     });
   });
-  // -----------------------------------------------
 };
