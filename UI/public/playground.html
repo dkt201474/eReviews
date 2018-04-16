@@ -12,6 +12,7 @@
     .tableWrapper {
         width: 90%;
         margin-left: 5%;
+        margin-bottom: 50px;
     }
 
     .demo {
@@ -41,6 +42,27 @@
             <a href="http://localhost:3000/ereviews/reports">Reports</a>
         </h4>
 
+        <!-- Modal -->
+        <div id="testcaseConfig" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Personnalize your testcase here</h4>
+                    </div>
+                    <div class="modal-body" id="testcaseModalBody">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal" id="testcaseConfigButton">Save</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
         <div class="tableWrapper" id="tableWrapper">
             <table class="demo">
                 <thead>
@@ -50,7 +72,8 @@
                         <th id="headerDesc">Action description</th>
                         <th id="headerPrereq">Prerequisite</th>
                         <th id="headerEmail">Email involved</th>
-                        <th id="headerEmail">Run Action</th>
+                        <th id="headerConfig">Config</th>
+                        <th id="headerRun">Run Action</th>
                     </tr>
                 </thead>
                 <tbody id="templateContent">
@@ -59,6 +82,7 @@
         </div>
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </body>
 
 </html>
@@ -66,7 +90,7 @@
 <script>
     let runTest;
     $(function () {
-        $.getJSON('http://localhost:3000/ereviews/credentials', function (data) {
+        $.getJSON('http://localhost:3000/ereviews/credentials', function (credentialsData) {
             $.getJSON('http://localhost:3000/ereviews/testcases/list', function (data) {
                 const AUTOMATED = data;
 
@@ -93,6 +117,8 @@
                             template.prerequisite +
                             "</td> <td style='background: " + rowColor + ";' id='templateEmailInvolved'>" +
                             template.email_involved +
+                            "</td> <td style='background: " + rowColor + ";' id='testConfig'>" +
+                            "<button class='btn btn-default' id='" + 'config_' + template.id + "'>config</button>" +
                             " </td> <td style='background: " + rowColor + ";' id='templateTestButton'> <button class='btn btn-primary' id='" + 'btn_' + template.id + "'>Test</button> </td > </tr>"
                         );
 
@@ -102,6 +128,36 @@
                         }
 
                         $(`${buttonId}`).unbind('click').click((e) => runTest(template.id));
+
+                        // Personnalize testcases
+                        let form = `
+                        <p>
+                            <label>What is the number of the project ?</label>
+                        </p>
+                        <input name="config" id="config_A2_1"/> `;
+
+                        // populate with right form
+                        // Test: A2_1
+                        $('#config_A2_1').unbind('click').click(e => {
+                            $('#testcaseModalBody').html(form);
+                            $('#testcaseConfig').modal('show')
+                            $('#testcaseConfigButton').unbind('click').click(() => {
+                                const inputValue = $('#config_A2_1').val();
+                                console.log(credentialsData);
+
+                                let payload = { user: credentialsData.user, configID: 'A2_1', config: { projectID: inputValue } }
+
+                                $.post(
+                                    'http://localhost:3000/ereviews/test/config',
+                                    payload,
+                                    (data, status) => {
+                                        // console.log(data); 
+                                    },
+                                    'json'
+                                )
+                            });
+                        })
+
                     }
                 }
             });
@@ -109,7 +165,5 @@
             .fail((obj, status, err) => {
                 $("#tableWrapper").html("<div>Your config file is required before using this service. You can create it by hitting the 'Configs' button <a href='http://localhost:3000/ereviews'>here</a></div>")
             });
-        // get templates files
-
     })
 </script>

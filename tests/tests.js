@@ -190,7 +190,7 @@ module.exports = {
       // Switch to researcher module
       // .waitForElementVisible (DOM.buttons.researcherModule)
       .click (DOM.buttons.researcherModule)
-      .pause (1500)
+      .pause (1000)
       // Create a new project
       .waitForElementVisible (DOM.buttons.newProject)
       .click (DOM.buttons.newProject)
@@ -318,6 +318,38 @@ module.exports = {
       .pause (10000)
       .end ();
   },
+  A2_1: function (browser) {
+    browser
+      .url (CONFIGS.global.ResearcherPortal) // go to researcher login portal
+      .waitForElementVisible ('body'); // wait for the body to be rendered
+
+    // once in the researcher portal
+    browser.assert
+      // .........................................................................
+      // Step 1: LOGIN
+      // Page: SignIn page
+      // .........................................................................
+      .containsText ('body', 'Sign in') // we are in the signin page
+      .useXpath ()
+      .assert.visible (DOM.inputs.username) // the username field is present
+      .assert.visible (DOM.inputs.password) // the password field is present
+      .setValue (DOM.inputs.username, CREDENTIALS.pi.username)
+      .setValue (DOM.inputs.password, CREDENTIALS.pi.password)
+      .click (DOM.buttons.signIn)
+      // .........................................................................
+      // Step 2: Create a new project
+      // Page: Researcher Dashboard
+      // .........................................................................
+      .pause (1000)
+      .click ('//*[@id="profile:j_idt516"]')
+      .pause (1000)
+      // Switch to researcher module
+      // .waitForElementVisible (DOM.buttons.researcherModule)
+      .click (DOM.buttons.researcherModule)
+      .pause (10000)
+      .end ();
+  },
+
   e51: function (browser) {
     browser
       .url (CONFIGS.global.ResearcherPortal) // go to researcher login portal

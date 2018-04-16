@@ -261,12 +261,14 @@
                 credentials.director = { username: fields.director_username, password: fields.director_password };
                 credentials.user = fields.user;
 
-                console.log(credentials);
+                // console.log(credentials);
 
                 $.post(
                     'http://localhost:3000/ereviews/credentials',
                     credentials,
-                    (data, status) => { console.log(data); },
+                    (data, status) => {
+                        // console.log(data); 
+                    },
                     'json'
                 ).done(alert('Config file created successfully'));
             })

@@ -113,7 +113,9 @@
                 $.post(
                     'http://localhost:3000/ereviews/credentials',
                     configs,
-                    (data, status) => { console.log(data); },
+                    (data, status) => {
+                        // console.log(data); 
+                    },
                     'json'
                 ).done(alert('Config file created successfully'));
 

@@ -58,6 +58,30 @@ module.exports = (app, db) => {
     });
   });
 
+  // ======== Test config =================================
+  app.post ('/ereviews/test/config', (req, res) => {
+    const filename = 'config.json';
+    const config = req.body.config;
+    const configID = req.body.configID;
+    const user = req.body.user;
+
+    // Read file
+    jsonfile.readFile (filename, (err, data) => {
+      if (err) {
+        res.send ({error: 'Resources not found'});
+      } else {
+        // get object and append data
+        let newConfig = data;
+        newConfig[user][configID] = config;
+
+        // write new config
+        jsonfile.writeFile (filename, newConfig, err => {
+          console.log (data);
+        });
+      }
+    });
+  });
+
   // ======== Reports =================================
   app.post ('/ereviews/report/create', (req, res) => {
     // console.log (req.body);
@@ -139,8 +163,8 @@ module.exports = (app, db) => {
         res.setHeader ('Content-Type', 'application/json');
 
         if (!user) {
-          console.log ('User not found');
-          console.log (name);
+          // console.log ('User not found');
+          // console.log (name);
         } else if (user.reports.length <= 0) {
           res.send ({error: 'Error: The asked resource is empty'});
         } else {
@@ -176,10 +200,11 @@ module.exports = (app, db) => {
       prerequisite: req.body.prerequisite,
       email_involved: req.body.email_involved,
     };
+
     db.collection ('testcases').insert (test, (err, results) => {
       if (err) {
         res.send ({error: 'An error has occurred'});
-        console.log (err);
+        // console.log (err);
       } else {
         res.send (results.ops[0]);
       }
@@ -190,7 +215,7 @@ module.exports = (app, db) => {
     db.collection ('testcases').find ({}).toArray ((err, results) => {
       if (err) {
         res.send ({error: 'An error has occured'});
-        console.log (err);
+        // console.log (err);
       } else {
         res.setHeader ('Content-Type', 'application/json');
         res.send (JSON.stringify (results));
