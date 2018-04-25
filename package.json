@@ -36,9 +36,8 @@
     "A25": "nightwatch --test tests\\tests.js --testcase FROM_CHAIR_PO-ADD-PERMISSIONS-REQUIRED --env local",
     "A26": "nightwatch --test tests\\tests.js --testcase FROM_CHAIR_PO-RESUBMIT --env local",
     "A27": "nightwatch --test tests\\tests.js --testcase FROM_CHAIR_PO-REFUSED --env local",
-    "UNIWEB_1": "nightwatch --test tests\\tests.js --testcase UNIWEB_1 --env local",
-    "UNIWEB_2": "nightwatch --test tests\\tests.js --testcase UNIWEB_2 --env local",
-    "UNIWEB_3": "nightwatch --test tests\\tests.js --testcase UNIWEB_3 --env local",
+    "A2_1": "nightwatch --test tests\\tests.js --testcase A2_1 --env local",
+    "A2_1_DRAFT": "nightwatch --test tests\\tests.js --testcase A2_1_DRAFT --env local",
     "dev": "./node_modules/.bin/nodemon -w test/index.html --delay 250ms --exec 'npm run upload'",
     "start": "./node_modules/.bin/nodemon ui/server.js"
   },

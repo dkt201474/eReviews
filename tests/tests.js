@@ -346,10 +346,184 @@ module.exports = {
       // Switch to researcher module
       // .waitForElementVisible (DOM.buttons.researcherModule)
       .click (DOM.buttons.researcherModule)
+      .pause (1000)
+      .setValue ('//*[@id="global_filter"]', TESTS_CONFIG.A2_1.projectID)
+      .pause (1000)
+      .keys (browser.Keys.ENTER)
+      .pause (1000)
+      .click ('//*[@id="Form:tabv:approvedID_data"]/tr/td[1]/a')
+      .pause (1000)
+      // .click ('//*[@id="Form:j_idt85"]/span')
+      .click ('//*[.="Renewal / Project Closure"]')
+      .pause (1000)
+      .waitForElementVisible (
+        '//*[@id="Form:dataCollectionCompleteId:customRadio"]/tbody/tr/td[1]/div/div[2]'
+      )
+      .click (
+        '//*[@id="Form:dataCollectionCompleteId:customRadio"]/tbody/tr/td[1]/div/div[2]'
+      )
+      .pause (1000)
+      .click ('//*[@id="Form:requestionToId:j_idt76"]/div[2]')
+      .setValue ('//*[@id="Form:j_idt111:j_idt121"]', 'Automated test')
+      .pause (1000)
+      .setValue ('//*[@id="Form:j_idt126:j_idt121"]', 'Automated test2')
+      .pause (1000)
+      .click (
+        '//*[@id="Form:complaintStudyId:customRadio"]/tbody/tr/td[1]/div/div[2]'
+      )
+      .pause (1000)
+      .setValue ('//*[@id="Form:j_idt127:j_idt121"]', 'Automated test3')
+      .pause (1000)
+      .click ('//*[@id="Form:j_idt128:uploadButton"]')
+      .pause (1000)
+      .setValue (
+        '//*[@id="Form:j_idt128:contunuing1Upload:AttachmentUpload_input"]',
+        require ('path').resolve (__dirname + '/files/REB_certificate.docx')
+      )
+      .pause (1000)
+      .click (
+        '//*[@id="Form:j_idt128:contunuing1Upload:AttachmentUpload"]/div[1]/button[1]'
+      )
+      .pause (2000)
+      .click ('//*[@id="Form:j_idt128:contunuing1Upload:j_idt135"]')
+      .pause (1000)
+      .click (
+        '//*[@id="Form:researchTeamMembersId:customRadio"]/tbody/tr/td[3]/div/div[2]'
+      )
+      .pause (1000)
+      .click (
+        '//*[@id="Form:researchDesignId:customRadio"]/tbody/tr/td[3]/div/div[2]'
+      )
+      .pause (1000)
+      .click (
+        '//*[@id="Form:recruitementDocumentId:customRadio"]/tbody/tr/td[3]/div/div[2]'
+      )
+      .pause (1000)
+      .click (
+        '//*[@id="Form:consentDocumentId:customRadio"]/tbody/tr/td[3]/div/div[2]'
+      )
+      .pause (1000)
+      .click (
+        '//*[@id="Form:conservationOfDataId:customRadio"]/tbody/tr/td[3]/div/div[2]'
+      )
+      .pause (1000)
+      .click (
+        '//*[@id="Form:riskBenefitEvaluationId:customRadio"]/tbody/tr/td[3]/div/div[2]'
+      )
+      .pause (1000)
+      .click ('//*[@id="Form:principalInvestigatorId:inputTxtId"]/div[2]')
+      .pause (1000)
+      .click ('//*[@id="Form:reviewedTheContentId:inputTxtId"]/div[2]')
+      .pause (1000)
+      .click ('//*[@id="Form:Transmit"]')
+      .pause (1000)
+      .acceptAlert ()
+      .pause (10000);
+  },
+  A2_1_DRAFT: function (browser) {
+    browser
+      .url (CONFIGS.global.ResearcherPortal) // go to researcher login portal
+      .waitForElementVisible ('body'); // wait for the body to be rendered
+
+    // once in the researcher portal
+    browser.assert
+      // .........................................................................
+      // Step 1: LOGIN
+      // Page: SignIn page
+      // .........................................................................
+      .containsText ('body', 'Sign in') // we are in the signin page
+      .useXpath ()
+      .assert.visible (DOM.inputs.username) // the username field is present
+      .assert.visible (DOM.inputs.password) // the password field is present
+      .setValue (DOM.inputs.username, CREDENTIALS.pi.username)
+      .setValue (DOM.inputs.password, CREDENTIALS.pi.password)
+      .click (DOM.buttons.signIn)
+      // .........................................................................
+      // Step 2: Create a new project
+      // Page: Researcher Dashboard
+      // .........................................................................
+      .pause (1000)
+      .click ('//*[@id="profile:j_idt516"]')
+      .pause (1000)
+      // Switch to researcher module
+      // .waitForElementVisible (DOM.buttons.researcherModule)
+      .click (DOM.buttons.researcherModule)
+      .pause (1000)
+      .setValue ('//*[@id="global_filter"]', TESTS_CONFIG.A2_1.projectID)
+      .pause (1000)
+      .keys (browser.Keys.ENTER)
+      .pause (1000)
+      .click ('//*[@id="Form:tabv:approvedID_data"]/tr/td[1]/a')
+      .pause (1000)
+      .click ('//*[@id="Form:tabv"]/ul/li[2]')
+      .pause (1000)
+      .click ('//*[@id="Form:tabv:unsubmitedList:0:j_idt313"]')
+      .pause (1000)
+      .waitForElementVisible (
+        '//*[@id="Form:dataCollectionCompleteId:customRadio"]/tbody/tr/td[1]/div/div[2]'
+      )
+      .click (
+        '//*[@id="Form:dataCollectionCompleteId:customRadio"]/tbody/tr/td[1]/div/div[2]'
+      )
+      .pause (1000)
+      .click ('//*[@id="Form:requestionToId:j_idt76"]/div[2]')
+      .setValue ('//*[@id="Form:j_idt111:j_idt121"]', 'Automated test')
+      .pause (1000)
+      .setValue ('//*[@id="Form:j_idt126:j_idt121"]', 'Automated test2')
+      .pause (1000)
+      .click (
+        '//*[@id="Form:complaintStudyId:customRadio"]/tbody/tr/td[1]/div/div[2]'
+      )
+      .pause (1000)
+      .setValue ('//*[@id="Form:j_idt127:j_idt121"]', 'Automated test3')
+      .pause (1000)
+      .click ('//*[@id="Form:j_idt128:uploadButton"]')
+      .pause (1000)
+      .setValue (
+        '//*[@id="Form:j_idt128:contunuing1Upload:AttachmentUpload_input"]',
+        require ('path').resolve (__dirname + '/files/REB_certificate.docx')
+      )
+      .pause (1000)
+      .click (
+        '//*[@id="Form:j_idt128:contunuing1Upload:AttachmentUpload"]/div[1]/button[1]'
+      )
+      .pause (2000)
+      .click ('//*[@id="Form:j_idt128:contunuing1Upload:j_idt135"]')
+      .pause (1000)
+      .click (
+        '//*[@id="Form:researchTeamMembersId:customRadio"]/tbody/tr/td[3]/div/div[2]'
+      )
+      .pause (1000)
+      .click (
+        '//*[@id="Form:researchDesignId:customRadio"]/tbody/tr/td[3]/div/div[2]'
+      )
+      .pause (1000)
+      .click (
+        '//*[@id="Form:recruitementDocumentId:customRadio"]/tbody/tr/td[3]/div/div[2]'
+      )
+      .pause (1000)
+      .click (
+        '//*[@id="Form:consentDocumentId:customRadio"]/tbody/tr/td[3]/div/div[2]'
+      )
+      .pause (1000)
+      .click (
+        '//*[@id="Form:conservationOfDataId:customRadio"]/tbody/tr/td[3]/div/div[2]'
+      )
+      .pause (1000)
+      .click (
+        '//*[@id="Form:riskBenefitEvaluationId:customRadio"]/tbody/tr/td[3]/div/div[2]'
+      )
+      .pause (1000)
+      .click ('//*[@id="Form:principalInvestigatorId:inputTxtId"]/div[2]')
+      .pause (1000)
+      .click ('//*[@id="Form:reviewedTheContentId:inputTxtId"]/div[2]')
+      .pause (1000)
+      .click ('//*[@id="Form:Transmit"]')
+      .pause (1000)
+      .acceptAlert ()
       .pause (10000)
       .end ();
   },
-
   e51: function (browser) {
     browser
       .url (CONFIGS.global.ResearcherPortal) // go to researcher login portal
@@ -419,8 +593,7 @@ module.exports = {
       // Set a comment to explain the reason why project stutus changed
       // .waitForElementVisible ('//*[@id="Form:j_idt72:j_idt80"]/div/iframe')
       // .setValue (
-      //   //*[@id="Form:j_idt72:j_idt80"]/div
-      //   '//*[@id="Form:j_idt72:j_idt80"]/div/iframe',
+      //   '/iframe',
       //   'dddd'
       //   // DOM.textarea.onHoldComments
       // )
@@ -760,10 +933,10 @@ module.exports = {
 
       // ---1--- Select the first element
       .waitForElementVisible (
-        '//*[@id="dashboardForm:initial:initialList:initialTaskStudy:1:j_idt95"]'
+        '//*[@id="dashboardForm:initial:initialList:initialTaskStudy:0:j_idt95"]'
       )
       .click (
-        '//*[@id="dashboardForm:initial:initialList:initialTaskStudy:1:j_idt95"]'
+        '//*[@id="dashboardForm:initial:initialList:initialTaskStudy:0:j_idt95"]'
       )
       .pause (1000)
       // ---2--- Is the request form complete ? => YES
@@ -859,10 +1032,10 @@ module.exports = {
 
       // ---1--- Select the first element
       .waitForElementVisible (
-        '//*[@id="dashboardForm:initial:initialList:initialTaskStudy:1:j_idt95"]'
+        '//*[@id="dashboardForm:initial:initialList:initialTaskStudy:0:j_idt95"]'
       )
       .click (
-        '//*[@id="dashboardForm:initial:initialList:initialTaskStudy:1:j_idt95"]'
+        '//*[@id="dashboardForm:initial:initialList:initialTaskStudy:0:j_idt95"]'
       )
       .pause (1000)
       // ---2--- Is the request form complete ? => YES
@@ -1951,6 +2124,7 @@ module.exports = {
       //---13--PO-> Confirm
       .click ('//*[@id="uOttawaTask4Form:j_idt1015"]')
       .pause (10000)
+      .pause ()
       .end ();
   },
 };

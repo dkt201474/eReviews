@@ -127,7 +127,14 @@
                             $.post('http://localhost:3000/ereviews', { testId: templateId });
                         }
 
-                        $(`${buttonId}`).unbind('click').click((e) => runTest(template.id));
+                        $(`${buttonId}`).click((e) => {
+                            e.preventDefault();
+                            $('button').prop('disabled', true);
+                            runTest(template.id)
+                            setTimeout(() => {
+                                $('button').prop('disabled', false);
+                            }, 10000)
+                        });
 
                         // Personnalize testcases
                         let form = `
@@ -158,6 +165,26 @@
                             });
                         })
 
+                        // Test: A2_1_DRAFT
+                        $('#config_A2_1_DRAFT').unbind('click').click(e => {
+                            $('#testcaseModalBody').html(form);
+                            $('#testcaseConfig').modal('show');
+                            $('#testcaseConfigButton').unbind('click').click(() => {
+                                const inputValue = $('#config_A2_1').val();
+                                console.log(credentialsData);
+
+                                let payload = { user: credentialsData.user, configID: 'A2_1_DRAFT', config: { projectID: inputValue } }
+
+                                $.post(
+                                    'http://localhost:3000/ereviews/test/config',
+                                    payload,
+                                    (data, status) => {
+                                        // console.log(data); 
+                                    },
+                                    'json'
+                                )
+                            });
+                        })
                     }
                 }
             });
