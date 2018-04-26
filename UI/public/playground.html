@@ -171,7 +171,6 @@
                             $('#testcaseConfig').modal('show');
                             $('#testcaseConfigButton').unbind('click').click(() => {
                                 const inputValue = $('#config_A2_1').val();
-
                                 console.log(credentialsData);
 
                                 let payload = { user: credentialsData.user, configID: 'A2_1_DRAFT', config: { projectID: inputValue } }
